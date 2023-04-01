@@ -1,7 +1,7 @@
 import './current-weather.css';
 import {Box, Button, ThemeProvider, useTheme} from "@mui/material";
 
-const CurrentWeather = () => {
+const CurrentWeather = ({data}) => {
 
     const theme = useTheme();
 
@@ -25,7 +25,7 @@ const CurrentWeather = () => {
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{
-                width: '300px',
+                width: '400px',
                 background: "#444",
                 borderRadius: '6px',
                 boxShadow: '10px 10px 20px 2px rgba(0,0,0,.3)',
@@ -47,7 +47,7 @@ const CurrentWeather = () => {
                                 margin: 0,
                                 letterSpacing: '1px'
                             }}>
-                            City
+                            {data.city}
                         </p>
                         <p
                             style={{
@@ -56,12 +56,12 @@ const CurrentWeather = () => {
                                 lineHeight: 1,
                                 margin: '10px 0 0px'
                             }}>
-                            Weather description
+                            {data.weather[0].description}
                         </p>
                     </Box>
                     <img
                         alt='weather'
-                        src='icons/01d.png'
+                        src={`icons/${data.weather[0].icon}.png`}
                         style={{
                             width: '100px'
                         }}
@@ -75,12 +75,10 @@ const CurrentWeather = () => {
                     <p style={{
                         fontWeight: 600,
                         fontSize: '70px',
-                        width: 'auto',
-                        letterSpacing: '-5px',
                         margin: '10px 0'
-                    }}>18C</p>
+                    }}>{Math.round((data.main.temp))}°C</p>
                     <Box sx={{
-                        width: '100%',
+                        width: '50%',
                         paddingLeft: '20px'
                     }}>
                         <Box sx={parameterRow}>
@@ -89,20 +87,20 @@ const CurrentWeather = () => {
                         <Box sx={parameterRow}>
 
                             <span style={parameterLabel}>Feels like</span>
-                            <span style={parameterValue}>Value</span>
+                            <span style={parameterValue}>{Math.round((data.main.feels_like))}°C</span>
                         </Box>
                         <Box sx={parameterRow}>
 
                             <span style={parameterLabel}>Wind</span>
-                            <span style={parameterValue}>2 m/s</span>
+                            <span style={parameterValue}>{Math.round((data.wind.speed))} m/s</span>
                         </Box>
                         <Box sx={parameterRow}>
                             <span style={parameterLabel}>Humidity</span>
-                            <span style={parameterValue}>15%</span>
+                            <span style={parameterValue}>{data.main.humidity}%</span>
                         </Box>
                         <Box sx={parameterRow}>
                             <span style={parameterLabel}>Pressure</span>
-                            <span style={parameterValue}>988 hPa</span>
+                            <span style={parameterValue}>{data.main.pressure} hPa</span>
                         </Box>
                     </Box>
                 </Box>
