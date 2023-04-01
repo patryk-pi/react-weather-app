@@ -7,11 +7,13 @@ const CurrentWeather = () => {
 
     return (
         <ThemeProvider theme={theme}>
-        <Box>
             <Box>
-<Button>Jakis przycisk</Button>
+                <Box>
+                    <p>City</p>
+                    <p>Weather description</p>
+                </Box>
+                <img alt='weather' src='' />
             </Box>
-        </Box>
         </ThemeProvider>
     )
 }
